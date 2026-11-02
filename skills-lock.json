@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "content-reviewer": {
+      "source": "danpaul/agent_skills_edu_presentations",
+      "sourceType": "github",
+      "skillPath": "content-reviewer/SKILL.md",
+      "computedHash": "f2a9e25d22361b1dd40b17581da6a19bb14842fbd2e8cd4ba1ffde5773ad74e2"
+    },
+    "fact-checker": {
+      "source": "danpaul/agent_skills_edu_presentations",
+      "sourceType": "github",
+      "skillPath": "fact-checker/SKILL.md",
+      "computedHash": "9475b0ee1fbee1471ee0104137f116ad15b99acd5d5c7d81866daf964f5fba63"
+    },
+    "generate-presentations": {
+      "source": "danpaul/agent_skills_edu_presentations",
+      "sourceType": "github",
+      "skillPath": "generate-presentations/SKILL.md",
+      "computedHash": "deed881fbb37d37713281e1ddf3ec5925673f596003a4b5767bd48e83c17ea98"
+    },
+    "proofread-presentations": {
+      "source": "danpaul/agent_skills_edu_presentations",
+      "sourceType": "github",
+      "skillPath": "proofread-presentations/SKILL.md",
+      "computedHash": "b8d9a22f57d3a7696be263aa73238a0f2961f5b33d3e9f7975b672b7056189c9"
+    },
+    "structure-review": {
+      "source": "danpaul/agent_skills_edu_presentations",
+      "sourceType": "github",
+      "skillPath": "structure-review/SKILL.md",
+      "computedHash": "f4c2dd34d052e5c4ce5815a5d790b6be9ce068242740e9a6aa7020d0dcbfbc3e"
+    },
+    "template-presentation": {
+      "source": "danpaul/agent_skills_edu_presentations",
+      "sourceType": "github",
+      "skillPath": "template-presentation/SKILL.md",
+      "computedHash": "014c707eae4a510e94e4922e0418337bddfc6ba0d2499ec6599e892df44edad6"
+    }
+  }
+}

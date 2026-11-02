@@ -1,0 +1,10 @@
+{
+  "name": "generate-presentations",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build Marp presentations into one folder per deck",
+  "dependencies": {
+    "@marp-team/marp-cli": "^4.2.0"
+  }
+}

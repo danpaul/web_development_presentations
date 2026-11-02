@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 720">
+  <g font-family="Arial, sans-serif">
+    <rect x="36" y="48" width="348" height="112" fill="#FFFFFF" stroke="#000000" stroke-width="3"/>
+    <rect x="36" y="48" width="16" height="112" fill="#FFFF00"/>
+    <text x="76" y="98" fill="#000000" font-size="28" font-weight="700">Deck folder</text>
+    <text x="76" y="132" fill="#000000" font-size="20">index.md and assets/</text>
+
+    <rect x="204" y="172" width="12" height="16" fill="#E3027F"/>
+    <polygon points="210,206 194,180 226,180" fill="#E3027F"/>
+
+    <rect x="36" y="220" width="348" height="112" fill="#FFFFFF" stroke="#000000" stroke-width="3"/>
+    <rect x="36" y="220" width="16" height="112" fill="#E3027F"/>
+    <text x="76" y="270" fill="#000000" font-size="28" font-weight="700">Inholland theme</text>
+    <text x="76" y="304" fill="#000000" font-size="20">inholland.css</text>
+
+    <rect x="204" y="344" width="12" height="16" fill="#E3027F"/>
+    <polygon points="210,378 194,352 226,352" fill="#E3027F"/>
+
+    <rect x="36" y="392" width="348" height="112" fill="#FFFFFF" stroke="#000000" stroke-width="3"/>
+    <rect x="36" y="392" width="16" height="112" fill="#000000"/>
+    <text x="76" y="442" fill="#000000" font-size="28" font-weight="700">HTML</text>
+    <text x="76" y="476" fill="#000000" font-size="20">presentations/example/</text>
+  </g>
+</svg>
