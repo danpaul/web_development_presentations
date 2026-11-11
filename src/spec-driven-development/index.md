@@ -14,7 +14,6 @@ paginate: true
 }
 </style>
 
-
 <!-- class: invert -->
 
 # Spec-Driven Development (SDD)
@@ -30,8 +29,6 @@ paginate: true
 - Foundational concepts
 - Context engineering
 - SDD in practice
-
-![bg contain right:50%](./assets/sdd.jpg)
 
 ---
 
@@ -119,29 +116,6 @@ _**Spec-driven development** is the emerging standard around developing applicat
 
 ---
 
-## SDD at a glance, two Engineers, one task
-
-<style scoped>
-  section {
-    font-size: 18px;
-  }
-</style>
-
-**Task:** Rate-limit payment - max 10 requests per user per minute.
-
-|                    | Engineer A (vibe)                                                                            | Engineer B (AI-native)                                                                            |
-| ------------------ | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Approach**       | “Add rate limiting… max 10/min.” Merge in ~30s.                                              | 10 min of notes first, then prompt with that context.                                             |
-| **Implementation** | Sliding-window middleware keyed on **client IP**; new Redis client; looks clean; tests pass. | Approved cache wrapper; keyed on **`user_id`**; idempotency-key exemption; correct metric format. |
-| **Missed**         | Corporate NAT (shared IP → false positives); dynamic residential IPs (fraud bypass).         | Found a gap (idempotency key present but previous request failed); updated spec; re-ran.          |
-| **Outcome**        | Incident, rollback, a day of remediation.                                                    | Shipped a feature that handled the real problem.                                                  |
-
-**Notes B wrote before prompting:** per-user (not IP) because of NAT; auth already attaches `user_id`; identical idempotency keys must not count; observability metric format; Redis in same AZ + approved cache wrapper.
-
-Same tool. Extra 10 minutes of writing. Difference was the engineering, not the model.
-
----
-
 ## Why the old workflow no longer scales
 
 <style scoped>
@@ -172,16 +146,17 @@ Traditional development assumed **implementation speed was the bottleneck**, and
   }
 </style>
 
-When an agent can draft a CRUD endpoint in 30 seconds, the scarce work moves **around** the translation:
+When an agent can draft a CRUD endpoint in 30 seconds, the work **moves toward the spec**:
 
 - What should this actually do?
-- What invariants must hold?
+- What should not change?
 - What happens on bad input or under load?
 - Is this the right design for _this_ system?
 
-An **orchestrator** defines work precisely, assigns it, reviews against intent, integrates what passes, and redirects what does not.
+...and **the verification**
 
-Addy Osmani: _every engineer is a manager now_ - not of people, of work that other capable entities produce.
+- Is there a verifiable way of proving the work has been completed?
+- Are tests comprehensive and passing?
 
 ---
 
@@ -211,7 +186,7 @@ Intent is an **outcome**, not a list of implementation steps.
 
 **Strong:** "Return display name, avatar URL, member-since date, and the 2 most recent public posts. 404 if the user does not exist. Hide email from unauthenticated callers. Cache 60s using the existing user-resource cache key convention."
 
-Vague intent produces vague code. The model will fill every gap with **training-data defaults** for "what a profile page usually looks like." Those defaults will match your system only by luck.
+**Vague intent produces vague code.** The model will fill every gap with **training-data defaults** for "what a profile page usually looks like." Those defaults will match your system only by luck.
 
 ---
 
@@ -263,7 +238,7 @@ Review against **criteria**, not against a vibe that it "looks right."
 
 ---
 
-## Human-in-the-loop is key
+<!-- ## Human-in-the-loop is key
 
 <style scoped>
   section {
@@ -281,7 +256,7 @@ Checkpoints that actually pay for themselves:
 
 Skipping review "to go faster" is backwards. A 10-minute spec review prevents hours of remediating the wrong implementation.
 
----
+--- -->
 
 <!-- class: invert -->
 
@@ -307,7 +282,7 @@ Everything the model knows about your task, codebase, standards, and intent must
 
 System prompt, AGENTS.md, rules files, referenced snippets, tool definitions, conversation history - the totality of what the model sees is what it begins reasoning with.
 
----
+<!-- ---
 
 ## Avoid agent assuming from training data
 
@@ -323,7 +298,9 @@ Nothing was wrong _in the abstract_. It was wrong _for your system_.
 
 A better prompt would not have fixed it. The information was never in the window.
 
-Same lesson as vibe coding: the model fills every gap with **training-data defaults**. Context engineering is how you stop that.
+Same lesson as vibe coding: the model fills every gap with **training-data defaults**. Context engineering is how you stop that. -->
+
+<!--
 
 ---
 
@@ -346,9 +323,9 @@ Prompt engineering remains a prerequisite. Multi-step agentic sessions change th
 
 Anthropic: the question shifts from “how should I phrase this?” to “**what configuration of context is most likely to generate the desired behavior?**”
 
-A prompt helps one session. A rules or AGENTS.md file in the repo helps every engineer, every session.
+A prompt helps one session. A rules or AGENTS.md file in the repo helps every engineer, every session. -->
 
----
+<!-- ---
 
 ## The window is finite - and not processed equally
 
@@ -364,7 +341,7 @@ Transformers compute **pairwise attention**: every token attends to every other.
 
 Result is a **gradient, not a cliff**: strong reliability in a small window, then a slow decline as it fills.
 
-A 200k window is not 200k of reliable working space. **Effective context ≈ 50% of the advertised limit.** Plan sessions and resets around that.
+A 200k window is not 200k of reliable working space. **Effective context ≈ 50% of the advertised limit.** Plan sessions and resets around that. -->
 
 ---
 
@@ -372,7 +349,7 @@ A 200k window is not 200k of reliable working space. **Effective context ≈ 50%
 
 ---
 
-## Two failure modes
+<!-- ## Two failure modes
 
 <style scoped>
   section {
@@ -388,7 +365,7 @@ They pull in opposite directions.
 
 Context engineering = navigate between them: **enough to reason well, structured so attention lands where it should**, updated as conditions change.
 
----
+--- -->
 
 ![bg contain](./assets/too_little_too_much.png)
 
@@ -397,7 +374,7 @@ Context engineering = navigate between them: **enough to reason well, structured
 <!-- ![bg contain](./assets/context_window_layers.png) -->
 
 <!-- --- -->
-
+<!--
 ## Always-on vs on-demand
 
 <style scoped>
@@ -420,11 +397,11 @@ Progressive disclosure:
 
 Repeatedly pasting the same extra context? Promote it to a rule or a skill.
 
----
+--- -->
 
-![bg contain](./assets/rules_vs_skills.png)
+<!-- ![bg contain](./assets/rules_vs_skills.png)
 
----
+--- -->
 
 <!-- class: invert -->
 
@@ -450,13 +427,13 @@ AGENTS.md can be thought of as the **agent's longterm project memory**.
 
 ![bg contain](./assets/agents_readme.png)
 
----
+<!-- ---
 
 ## No required schema
 
 There is **no fixed outline**. Any Markdown headings are valid.
 
-Record code style, architecture decisions, and conventions the project uses, so the agent does not invent them.
+Record code style, architecture decisions, and conventions the project uses, so the agent does not invent them. -->
 
 <!-- --- -->
 
@@ -495,6 +472,7 @@ The headings below are a **choice**, not a template.
 
 ---
 
+<!--
 ## Nested files and hierarchy of instructions
 
 A directory may have its own AGENTS.md.
@@ -503,11 +481,11 @@ The file **closest to the file being edited** wins.
 
 An explicit chat prompt **overrides** the files.
 
----
+--- -->
 
-![bg contain](./assets/agents_nested.png)
+<!-- ![bg contain](./assets/agents_nested.png)
 
----
+--- -->
 
 <!-- ## Listed commands
 
@@ -519,13 +497,13 @@ Commands named in the file, such as tests, are commands the agent **may run**, i
 
 --- -->
 
-## Living documentation
+<!-- ## Living documentation
 
-A standard decided in an SDD cycle is **invisible to the next session** until it is written into AGENTS.md.
+A standard decided in an SDD cycle is **invisible to the next session until it is written into AGENTS.md**.
 
 The next agent then starts from that decision.
 
----
+--- -->
 
 ![bg contain](./assets/agents_living.png)
 
@@ -533,14 +511,14 @@ The next agent then starts from that decision.
 
 ## Sources
 
-The open format, and the repo that maintains it.
+Core documentation:
 
 - [agents.md](https://agents.md/)
 - [agentsmd/agents.md](https://github.com/agentsmd/agents.md)
 
 ---
 
-## Code review
+<!-- ## Code review
 
 ![bg contain right:45%](./assets/code_review_detective.png)
 
@@ -548,7 +526,7 @@ Let's take a minute to review the rules and baseline agent context in our own pr
 
 Spend a few minutes reviewing AGENTS.md in the source code repo and then we'll talk about this together.
 
----
+--- -->
 
 <!-- class: invert -->
 
@@ -628,7 +606,7 @@ Run them in this order.
 
 <!-- class: lead -->
 
-## SDD steps
+<!-- ## SDD steps
 
 The general SDD workflow looks like this (this may vary slightly from team to team):
 
@@ -639,7 +617,7 @@ The general SDD workflow looks like this (this may vary slightly from team to te
 - Verify results
 - Update relevant architectural documents with any decisions that came out of the cycle
 
----
+--- -->
 
 ![bg contain](./assets/sdd_practice_loop.png)
 
@@ -701,7 +679,7 @@ While grilling, the agent examines your spec file, identifies areas of uncertain
 
 Afterwards, the spec is updated with additional details the agent should need to begin implementation planning.
 
----
+<!-- ---
 
 ## To prompt or not to prompt?
 
@@ -713,9 +691,9 @@ When we want the agent to grill us on our spec, we _could_ simply prompt the age
 
 Yes! When we start to notice repetitive commands that we are making to the agent, such commands are good candidates for skills. Defining them as skills allows us to provide additional context and consistent instructions to the agent. Spec grilling in this project is **spec-grill-me**.
 
-</div>
+</div> -->
 
----
+<!-- ---
 
 ## Context matters
 
@@ -727,7 +705,7 @@ By creating a new context, we remove unnecessary context details from the spec c
 
 Going into planning, our goal is to feed a clear, concise, implementable specification with all necessary details to the agent for implementation planning.
 
-</div>
+</div> -->
 
 ---
 
@@ -765,11 +743,11 @@ Tests should be included as part of your rules and added for each new feature th
 
 Finally, the agent should be instructed as part of the general rules to document in the rules or AGENTS.md file any architectural decisions or standards that were determined during the SDD cycle so these standards are part of future agents' working context.
 
----
+<!-- ---
 
 ## Frameworks and variations
 
-To reiterate, SDD is an evolving standard and implementation varies per-team and per-framework. We are keeping things low-level for now, for this class to understand the general process and key concepts, but if you are interested in diving deeper into a popular, well-supported framework for doing SDD development, you may want to check out GitHub's [spec-kit](https://github.com/github/spec-kit).
+To reiterate, SDD is an evolving standard and implementation varies per-team and per-framework. We are keeping things low-level for now, for this class to understand the general process and key concepts, but if you are interested in diving deeper into a popular, well-supported framework for doing SDD development, you may want to check out GitHub's [spec-kit](https://github.com/github/spec-kit). -->
 
 ---
 
